@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permision', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description')->nullable();
+        Schema::create('book', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('isbn');
+            $table->string('genre');
+            $table->integer('copies_available');
+            $table->foreignId(column:'author_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permision');
+        Schema::dropIfExists('book');
     }
 };
