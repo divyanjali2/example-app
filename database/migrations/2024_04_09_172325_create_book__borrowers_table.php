@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permission', function (Blueprint $table) {
+        Schema::create('book__borrowers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained()->onDelete('cascade');
-            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
+            $table->foreignId(column:'books_id')->constrained()->onDelete('cascade');
+            $table->foreignId(column:'borrowers_id')->constrained()->onDelete('cascade');
+            $table->date('borrowed_date');
+            $table->date('due_date');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_permission');
+        Schema::dropIfExists('book__borrowers');
     }
 };
